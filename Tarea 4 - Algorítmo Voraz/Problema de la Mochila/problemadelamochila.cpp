@@ -4,12 +4,13 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 	
-	int M = 26;
-	vector<int> b = {6,3,4,5,7};
-	vector<int> p = {10,12,15,7,2};
+	int M = 20;
+	vector<int> b = {25,24,15};
+	vector<int> p = {18,15,10};
 	vector<float> bp;
 	vector<float> X;
 	int actWeight = 0;
+	float actBen = 0;
 	cout<<"PROBLEMA DE LA MOCHILA\n";
 	cout<<"Peso Máximo: "<<M;
 	cout<<"\nVector de Pesos: ";
@@ -48,18 +49,21 @@ int main(int argc, char *argv[]) {
 		}
 		//imprime la posicion escojida
 		cout<<"Peso: "<<p[it]<<"; bi/pi: "<<*it3<<"; Posición: "<<it<<"\n";
-		bp.erase(it3);
+		*it3 = 0;
 		//algoritmo en sí
 		if(actWeight+p[it]<=M){
 			X[it]=1;
-			actWeight=actWeight+p[it];
+			actWeight+=p[it];
+			actBen+=b[it];
 		}
 		else{
 			X[it]=float(M-actWeight)/float(p[it]);
 			actWeight=M;
+			actBen+=b[it]*X[it];
 		}
 		//imprime metadata
 		cout<<"Peso Actual: "<<actWeight<<"\n";
+		cout<<"Beneficio Actual: "<<actBen<<"\n";
 		cout<<"Vector Solución: ";
 		for(int i=0; i<X.size(); i++){
 			cout<<X[i]<<" ";
